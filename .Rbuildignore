@@ -1,0 +1,6 @@
+^doctest\.Rproj$
+^\.Rproj\.user$
+^\./data/accident_2013\.csv\.bz2$
+^\./data/accident_2014\.csv\.bz2$
+^\./data/accident_2015\.csv\.bz2$
+^LICENSE\.md$

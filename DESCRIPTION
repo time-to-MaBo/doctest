@@ -1,0 +1,27 @@
+Package: doctest
+Title: Summaries for the accident data
+Version: 0.1
+Authors@R: 
+    person("MA", "BO", , "first.last@example.com", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: package includes the `fars_map_state` and `fars_summarize_years` functions
+             to creat plots and summaries of the accident data.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
+Depends: 
+    R (>= 2.10)
+LazyData: true
+Imports: 
+    dplyr,
+    maps,
+    readr,
+    tibble,
+    tidyr
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+VignetteBuilder: knitr

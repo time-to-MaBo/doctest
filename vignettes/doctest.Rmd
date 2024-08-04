@@ -1,0 +1,58 @@
+---
+title: "doctest"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{doctest}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This is the vignette for the \'doctest\' package. 
+The \'doctest\' package was build for the Coursera cours \'buidling R package\'.
+It includes accident data form the years 2013, 2014, 2015 and may be used 
+to create summary statistics and plots of the US accident data. 
+
+The user-level functions are `fars_summarize_years` and `fars_map_state` which 
+we will demonstrate below. See the help files for function-specific help. 
+
+Please note that the functions were slightly adapted as compared to the original 
+versions from the Coursera course. 
+This was mainly because I preferred to have the datasets within thew package itself
+instead of relying having the data in an appropriate folder structure outside of 
+the package.
+
+## Load the package
+Once the package is downloaded from Github and installed it may be loaded by
+```{r instl, eval = FALSE}
+library('devtools')
+devtools::install_github("time-to-MaBo/doctest")
+```
+
+```{r setup}
+library(doctest)
+?doctest
+help(package = "doctest")
+```
+
+## `fars_summarize_years`
+The function gives counts of accidents by year and month.
+
+```{r summary}
+fars_summarize_years(2013:2015)
+```
+
+## `fars_summarize_years`
+The function plots the location of the accidents within a chosen state and year
+
+```{r state}
+fars_map_state(1,2013)
+```
+
+
