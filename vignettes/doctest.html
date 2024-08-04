@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>doctest</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">doctest</h1>
+
+
+
+<p>This is the vignette for the &#39;doctest&#39; package. The &#39;doctest&#39; package
+was build for the Coursera cours &#39;buidling R package&#39;. It includes
+accident data form the years 2013, 2014, 2015 and may be used to create
+summary statistics and plots of the US accident data.</p>
+<p>The user-level functions are <code>fars_summarize_years</code> and
+<code>fars_map_state</code> which we will demonstrate below. See the
+help files for function-specific help.</p>
+<p>Please note that the functions were slightly adapted as compared to
+the original versions from the Coursera course. This was mainly because
+I preferred to have the datasets within thew package itself instead of
+relying having the data in an appropriate folder structure outside of
+the package.</p>
+<div id="load-the-package" class="section level2">
+<h2>Load the package</h2>
+<p>Once the package is downloaded from Github and installed it may be
+loaded by</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&#39;devtools&#39;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;time-to-MaBo/doctest&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(doctest)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>?doctest</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">help</span>(<span class="at">package =</span> <span class="st">&quot;doctest&quot;</span>)</span></code></pre></div>
+</div>
+<div id="fars_summarize_years" class="section level2">
+<h2><code>fars_summarize_years</code></h2>
+<p>The function gives counts of accidents by year and month.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">fars_summarize_years</span>(<span class="dv">2013</span><span class="sc">:</span><span class="dv">2015</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#&gt; # A tibble: 12 × 4</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt;    MONTH `2013` `2014` `2015`</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt;    &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt;  1     1   2230   2168   2368</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt;  2     2   1952   1893   1968</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt;  3     3   2356   2245   2385</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt;  4     4   2300   2308   2430</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt;  5     5   2532   2596   2847</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt;  6     6   2692   2583   2765</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt;  7     7   2660   2696   2998</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt;  8     8   2899   2800   3016</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co">#&gt;  9     9   2741   2618   2865</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="co">#&gt; 10    10   2768   2831   3019</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="co">#&gt; 11    11   2615   2714   2724</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="co">#&gt; 12    12   2457   2604   2781</span></span></code></pre></div>
+</div>
+<div id="fars_summarize_years-1" class="section level2">
+<h2><code>fars_summarize_years</code></h2>
+<p>The function plots the location of the accidents within a chosen
+state and year</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">fars_map_state</span>(<span class="dv">1</span>,<span class="dv">2013</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
