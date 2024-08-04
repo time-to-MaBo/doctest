@@ -54,3 +54,7 @@ and year
     fars_map_state(1,2013)
 
 ![](/tmp/Rtmp9bvE3k/preview-f5d82d386d30.dir/doctest_files/figure-markdown_strict/state-1.png)
+
+<!-- badges: start -->
+  [![R-CMD-check](https://github.com/time-to-MaBo/doctest/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/time-to-MaBo/doctest/actions/workflows/R-CMD-check.yaml)
+  <!-- badges: end -->
