@@ -1,6 +1,6 @@
 ---
 title: "doctest"
-output: md_document
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{doctest}
   %\VignetteEngine{knitr::rmarkdown}
